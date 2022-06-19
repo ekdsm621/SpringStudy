@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Injection -->
+	<!-- Exam exam = new NewlecExam();  -->
+	<bean id="exam" class="spring.di.entity.NewlecExam"></bean>
+	
+	<!-- ExamConsole console = new InlineExamConsole(); -->
+	<bean id="console" class="spring.di.ui.InlineExamConsole">
+		<!-- console.setExam(exam); -->
+		<!-- setExam: set 생략, 대문자를 소문자로 -->
+		<!-- value / ref 자료형에 따라 -->
+		<property name="exam" ref="exam"></property>		
+		
+	</bean>
+	
+</beans>

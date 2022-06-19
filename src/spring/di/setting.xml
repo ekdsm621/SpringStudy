@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+<context:component-scan base-package="spring.di"></context:component-scan>
+<!-- <context:annotation-config></context:annotation-config> -->
+
+<!-- 
+Injection 복습 순서
+	1. 객체 생성
+	2. setter로 필드에 값을 주입하는 방법
+	3. 생성자로 필드에 값을 주입하는 방법
+	4. Namespaces - p
+	5. 컬렉션을 주입하는 방법
+-->
+
+	<!-- Exam exam = new NewlecExam();  -->
+	<!-- 
+	<bean id="exam" class="spring.di.entity.NewlecExam">
+	 -->
+		<!-- setter는 여러 방법으로 입력 가능 -->
+		<!-- 
+		<property name="kor">
+			<value>10</value>
+		</property>
+		<property name="eng" value="20"></property>
+		<property name="math" value="30" />
+		<property name="com" value="40" />
+		 -->
+		 
+		 <!-- 생성자를 이용해서 필드 값 세팅 -->
+		 <!-- 순서 지정하지 않음 -->
+		 <!-- 
+		 <constructor-arg value="10"></constructor-arg>
+		 <constructor-arg value="20"></constructor-arg>
+		 <constructor-arg value="30"></constructor-arg>
+		 <constructor-arg value="40"></constructor-arg>
+		  -->
+		  <!-- 인덱스를 사용해서 순서 지정 -->
+		  <!-- 
+		  <constructor-arg index="0" value="10"></constructor-arg>
+		  <constructor-arg index="1" value="20"></constructor-arg>
+		  <constructor-arg index="3" value="30"></constructor-arg>
+		  <constructor-arg index="2" value="40"></constructor-arg>
+		  -->
+		  <!-- 필드명을 사용해서 지정(타입도 지정 가능) -->
+		  <!-- 
+		  <constructor-arg index="kor" type="int" value="10"></constructor-arg>
+		  <constructor-arg index="eng" value="20"></constructor-arg>
+		  <constructor-arg index="com" value="30"></constructor-arg>
+		  <constructor-arg index="math" value="40"></constructor-arg>
+		   -->
+		   
+	<!-- 처리기를 사용해서 처리 Namespaces - p 체크
+		 Namespace: 같은 이름을 다르게 식별하기 위한 것, 성과 같은 역할
+		 	<홍길동:bean></홍길동:bean> 홍길동이 처리할 bean
+		 	<김길동:bean></김길동:bean> 김길동이 처리할 bean
+		 	1. 어떤 처리기가 해당 태그를 처리해야하는지 알려주는 역할
+			2. 태그의 이름을 식별하는 역할
+		  -->
+	<!-- 
+	<bean id="exam" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="20">
+	</bean>
+	<bean id="exam2" class="spring.di.entity.NewlecExam" p:kor="30" p:eng="40">
+	</bean>
+	 -->
+	 
+	<!-- ExamConsole console = new InlineExamConsole(); -->
+	<!--  
+	<bean id="console" class="spring.di.ui.GridExamConsole">
+	 -->
+		<!-- console.setExam(exam); -->
+		<!-- setExam: set 생략, 대문자를 소문자로 -->
+		<!-- value / ref 자료형에 따라 -->
+		<!-- <property name="exam" ref="exam"></property> -->
+	<!-- 	
+	</bean>
+	 -->
+	
+	<!-- 컬렉션 주입하는 방법 -->
+	<!-- 1. bean으로 객체를 생성하면서 생성자로 컬렉션을 넘겨주는 방법 -->
+	<!-- 
+	<bean id="exams" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="spring.di.entity.NewlecExam" p:kor="1" p:eng="2"></bean>
+				<ref bean="exam"></ref>
+			</list>
+		</constructor-arg>
+	</bean>
+	 -->
+	 
+	<!-- 2 . 다른 처리기를 사용하여 컬렉션 객체를 생성하는 방법 (Namespaces - util 체크)-->
+	<!--
+	<util:list id="exams" list-class="java.util.ArrayList">
+		<bean class="spring.di.entity.NewlecExam" p:kor="1" p:eng="2"></bean>
+		<ref bean="exam"></ref>
+	</util:list>
+	-->
+	
+</beans>

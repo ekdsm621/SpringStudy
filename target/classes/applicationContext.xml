@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+<!-- 생성자 -->
+<!-- 
+<bean id="tv" class="polymorphism.SamsungTV" init-method="initMethod" destroy-method="destroyMethod" lazy-init="true">
+	<constructor-arg index="0" ref="sony"></constructor-arg>
+	<constructor-arg index="1" value="5000"></constructor-arg>
+</bean>
+<bean id="sony" class="polymorphism.SonySpeaker">
+</bean>
+ -->
+ 
+<!-- setter: bean 객체 생성 직후, 스프링 컨테이너가 setter 메서드 자동으로 호출 -->
+<!-- setter 메서드 / 기본생성자 필요 -->
+<!-- 
+<bean id="tv" class="polymorphism.SamsungTV" init-method="initMethod" destroy-method="destroyMethod" lazy-init="true">
+	<property name="speaker" ref="sony"></property>
+	<property name="price" ref="5000"></property>
+</bean>
+<bean id="sony" class="polymorphism.SonySpeaker">
+</bean>
+ -->
+
+<!-- p Namespace 사용 -->
+<!-- 
+<bean id="tv" class="polymorphism.SamsungTV"
+	p:speaker-ref="sony"
+	p:price="5000">
+</bean>
+<bean id="sony" class="polymorphism.SonySpeaker"></bean>
+ -->
+ 
+ <!-- 컬렉션 객체 주입(List) -->
+ <!-- 
+ <bean id="collectionBean" class="com.springbook.ioc.injection.CollectionBean">
+ 	<property name="addressList">
+ 		<list>
+ 			<value>서울시 강남구 역삼동</value>
+ 			<value>서울시 성동구 행당동</value>
+ 		</list>
+ 	</property>
+ </bean>
+  -->
+  
+<!-- 컬렉션 객체 주입(Set):중복 데이터 저장X -->
+<!-- 
+<bean id="collectionBean" class="com.springbook.ioc.injection.CollectionBean">
+	<property name="addressList">
+		<map value-type="java.lang.String">
+			<entry>
+				<key>
+					<value>고길동</value>
+				</key>
+				<value>서울시 강남구 역삼동</value>
+			</entry>
+			<entry>
+				<key>
+					<value>마이콜</value>
+				</key>
+				<value>서울시 강서구 화곡동</value>
+			</entry>
+		</map>
+	</property>
+</bean>
+ -->
+ 
+ <context:component-scan base-package="com.springbook.biz"></context:component-scan>
+</beans>
