@@ -20,6 +20,7 @@ public class BoardServiceClient {
 		
 		// 글 등록기능 테스트
 		BoardVO vo = new BoardVO();
+//		vo.setSeq(0);
 		vo.setTitle("임시제목1234");
 		vo.setWriter("홍길동");
 		vo.setContent("임시내용1234...");
@@ -27,8 +28,10 @@ public class BoardServiceClient {
 		
 		// 글 목록 검색 기능
 		List<BoardVO> boardList = boardService.getBoardList(vo);
-		for(BoardVO board:boardList) {
-			System.out.println(board.toString());
+		if(boardList == null) {
+		}
+		for (BoardVO board : boardList) {
+			System.out.println("---> " + board.toString());
 		}
 		
 		// 컨테이너 종료

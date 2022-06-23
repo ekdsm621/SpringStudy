@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.common.JDBCUtil;
 
-@Repository("boardDAO")
+//@Repository("boardDAO")
 public class BoardDAO {
 	// JDBC 관련 변수
 	private PreparedStatement pstmt = null;
