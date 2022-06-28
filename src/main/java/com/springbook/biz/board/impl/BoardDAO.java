@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.springbook.biz.board.BoardVO;
 import com.springbook.biz.common.JDBCUtil;
 
@@ -22,6 +24,8 @@ public class BoardDAO {
 	private final String BOARD_DELETE="DELETE BOARD WHERE SEQ=?";
 	private final String BOARD_GET="SELECT * FROM BOARD WHERE SEQ=?";
 	private final String BOARD_LIST="SELECT * FROM BOARD ORDER BY SEQ DESC";
+	private final String BOARD_LIST_T = "SELECT * FROM board WHERE title like '%'||?||'%' ORDER BY seq DESC;";
+	private final String BOARD_LIST_C = "SELECT * FROM board WHERE content like '%'||?||'%' ORDER BY seq DESC;";
 	
 	public void insertBoard(BoardVO vo) {
 		try {
@@ -97,7 +101,12 @@ public class BoardDAO {
 		BoardVO board = null;
 		try {
 			conn = JDBCUtil.getConnection();
-			pstmt = conn.prepareStatement(BOARD_LIST);
+			if(vo.getSearchCondition().equals("TITLE")) {
+				pstmt = conn.prepareStatement(BOARD_LIST_T);
+			}else {
+				pstmt = conn.prepareStatement(BOARD_LIST_C);
+			}
+			pstmt.setString(1, vo.getSearchKeyword());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

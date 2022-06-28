@@ -7,10 +7,11 @@ import java.sql.ResultSet;
 import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.common.JDBCUtil;
+import com.springbook.biz.user.UserService;
 import com.springbook.biz.user.UserVO;
 
-@Repository("userDAO")
-public class UserDAO{
+//@Repository("userDAO")
+public class UserDAO {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
